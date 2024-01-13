@@ -1,0 +1,76 @@
+collect static
+	switch settings to postgres
+	show running in docker
+	no css!
+	https://whitenoise.readthedocs.io/en/stable/index.html
+		pip install whitenoise
+		pf
+		Add Whitenoise middleware to settings.py MIDDLEWARE
+		Add STATIC_ROOT to settings.py following the docs.
+		$ python manage.py collectstatic
+		rebuild container.
+		Run again and see the pretty browseable api again.
+		
+volumes
+	I'm tired of rebuilding my db over and over
+	docker volumes!
+	add to docker-compose.yml
+	rebuild
+	migrate, createsuperuser, create a thing
+	docker compose down
+	docker compose up
+	check that thing is still there in admin panel
+	
+.env and elephantsql
+	docker compose down
+	pip install django-environ
+	pf
+	copy over `.env.sample` to Django project package
+	create a new `.env` in the project package
+	- set DEBUG=False
+	generate a new Django secret key
+		$ python -c "import secrets; print(secrets.token_urlsafe())"
+	create a new elephantsql database
+		create account/login to elephantsql.com
+		use free versions, no cc required (though it will push you)
+		"Create New Instance" button
+		name the instance, free plan, no tags
+		select closest region. if you run into issues choose a different location
+		click on blue link of name of instance for the Details
+	change `settings.py`
+	also add the SIMPLE_JWT and testing settings at the bottom
+	migrate in terminal (not container. it will take a few seconds bc cloud)
+	createsuperuser in terminal
+	test in terminal (need the optional SessionAuthentication auth classes)
+	runserver in terminal
+		admin panel
+		create thing
+	view thing in elephantsql's browser (choose the table from drop down)
+	demo running in Docker
+	don't need the db service or volumes! comment out to show
+		
+django cors
+	You need django-cors-headers to make requests from other domains, ie deployment
+	https://pypi.org/project/django-cors-headers/
+	$ pip install django-cors-headers
+	pf
+	settings.py:
+		add 'corsheaders', to installed apps
+		add "corsheaders.middleware.CorsMiddleware", 
+			to middleware, below security above whitenoise
+		set 
+			CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
+			CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
+
+
+deploy to vercel
+	acp to new repo
+	test in thunderclient
+
+deploy to ec2
+iam
+nginx + gunicorn
+
+deploy to aws lambda
+using zappa
+
