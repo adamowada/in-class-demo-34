@@ -65,12 +65,27 @@ django cors
 
 deploy to vercel
 	acp to new repo
+	vercel.json
+		change "src"
+		change "dest"
+	acp
+	new project in vercel.com
+	find repo
+	copy .env
+	click Deploy
+	fails with Django 5.0, which depends on Python 3.10 or higher, and vercel uses 3.9
+		Downgrade Django==4.2.9 in requirements.txt
+		acp
+	400 errors! 
+		check the error in the runtime logs
+		Add in-class-demo-34.vercel.app to allowed hosts
+		redeploy
+	this is a serverless deployment. Not using gunicorn or development server
+		managed by Vercel's infrastructure
 	test in thunderclient
 
 deploy to ec2
 iam
 nginx + gunicorn
 
-deploy to aws lambda
-using zappa
 

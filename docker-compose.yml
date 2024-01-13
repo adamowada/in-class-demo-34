@@ -12,16 +12,16 @@ services:
     ports:
       - "8000:8000"  # Map port 8000 of the container to port 8000 on the host machine.
 
-  # Define the 'db' service for the database.
-  db:
-    image: postgres  # Use the official Postgres image from Docker Hub.
-    environment:
-      - POSTGRES_DB=postgres  # Set the default database name.
-      - POSTGRES_USER=postgres  # Set the default database user.
-      - POSTGRES_PASSWORD=postgres  # Set the default database user password.
-    volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persist Postgres data to a named volume (postgres_data) to ensure data is saved across container restarts.
-
-# Define volumes used by the services.
-volumes:
-  postgres_data:  # Declare a named volume for the Postgres data. This ensures data persistence.
+#  # Define the 'db' service for the database.
+#  db:
+#    image: postgres  # Use the official Postgres image from Docker Hub.
+#    environment:
+#      - POSTGRES_DB=postgres  # Set the default database name.
+#      - POSTGRES_USER=postgres  # Set the default database user.
+#      - POSTGRES_PASSWORD=postgres  # Set the default database user password.
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data  # Persist Postgres data to a named volume (postgres_data) to ensure data is saved across container restarts.
+#
+## Define volumes used by the services.
+#volumes:
+#  postgres_data:  # Declare a named volume for the Postgres data. This ensures data persistence.
