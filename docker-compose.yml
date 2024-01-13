@@ -9,19 +9,14 @@ services:
     command: gunicorn things_api_project.wsgi:application --bind 0.0.0.0:8000 --workers 4  # Command to start the Gunicorn server with the specified number of workers.
     volumes:
       - .:/code  # Mount the current directory (.) into the container at /code. This allows for live code reloading.
-    ports:
-      - "8000:8000"  # Map port 8000 of the container to port 8000 on the host machine.
+    expose:
+      - "8000"
 
-#  # Define the 'db' service for the database.
-#  db:
-#    image: postgres  # Use the official Postgres image from Docker Hub.
-#    environment:
-#      - POSTGRES_DB=postgres  # Set the default database name.
-#      - POSTGRES_USER=postgres  # Set the default database user.
-#      - POSTGRES_PASSWORD=postgres  # Set the default database user password.
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data  # Persist Postgres data to a named volume (postgres_data) to ensure data is saved across container restarts.
-#
-## Define volumes used by the services.
-#volumes:
-#  postgres_data:  # Declare a named volume for the Postgres data. This ensures data persistence.
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - web
