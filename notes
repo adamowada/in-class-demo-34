@@ -120,6 +120,7 @@ deploy to ec2
 	Install Docker: $ sudo apt install docker.io
 	https://docs.docker.com/compose/install/linux/#install-the-plugin-manually
 		or? sudo apt install docker-compose
+	git clone
 	add ip address to allowed hosts
 	sudo docker-compose up -d --build
 
